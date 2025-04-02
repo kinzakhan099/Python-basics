@@ -1,0 +1,5 @@
+this is python file
+we'll talk about file handling in it.file handling is very important.
+file handling can be done in many ways.
+there are many functions available for file handling.
+we'll discuss them in detail.
