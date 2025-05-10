@@ -1,3 +1,5 @@
+#book management system
+#Book class
 class Book:
     def __init__(self, title, author, price):
         self.title=title
@@ -6,10 +8,12 @@ class Book:
         if not self.is_valid_price(price):
             raise ValueError("Invalid Input.")
     
+    #static method to validate price
     @staticmethod
     def is_valid_price(amount):
         return amount>0 and isinstance(amount, (int,float))
 
+    #class method to create a book from a string
     @classmethod
     def from_string(cls, new):
         try:
@@ -18,15 +22,18 @@ class Book:
         except ValueError:
             raise ValueError("Invalid input string format. Expected format: 'title;author;price'")
     
+    #instance method to apply discount to a book
     def discount_price(self, amount):
-        if not isinstance(amount, (int, float)) or amount < 0:
+        if not isinstance(amount, (int, float)) or amount<0:
             raise ValueError("Discount amount must be a non-negative number.")
-        return self.price * (1 - amount / 100)
+        return self.price*(1-amount/100)
     
 
 def main():
-    books = []  # List to store created books
-
+    #List to store created books
+    books=[]  
+    
+    #Menu loop
     while True:
         print("\n--- Book Management Menu ---")
         print("1. Add a new book")
@@ -37,19 +44,19 @@ def main():
         choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            # Add a new book
-            title = input("Enter book title: ").strip()
-            author = input("Enter book author: ").strip()
+            #Add a new book
+            title= input("Enter book title: ").strip()
+            author= input("Enter book author: ").strip()
             try:
-                price = float(input("Enter book price: ").strip())
-                book = Book(title, author, price)
+                price= float(input("Enter book price: ").strip())
+                book= Book(title, author, price)
                 books.append(book)
                 print(f"Book '{title}' added successfully!")
             except ValueError as e:
                 print(f"Error: {e}")
 
         elif choice == "2":
-            # Add a book from a string
+            #Add a book from a string
             book_string = input("Enter book details (format: title;author;price): ").strip()
             try:
                 book = Book.from_string(book_string)
